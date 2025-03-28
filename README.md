@@ -1,11 +1,12 @@
-**NovaCodex**
+# NovaCodex
 
 This project is being implemented to create an innovative program that will be aimed at supporting students in the IT field.
 
-How does NovaCodex help students and teachers?
+## How does NovaCodex help students and teachers?
 
 For students:
-- **"Live lecture" and "Pair programming" mode**:  
+
+**"Live lecture" and "Pair programming" mode**:  
   Participate in online sessions where a teacher or fellow students can connect to solve problems together, discuss code, and share experiences. 
 
 - **Automatic task verification**:
