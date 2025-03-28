@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 320, 250);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 290);
         stage.setTitle("NovaCodex");
         stage.setScene(scene);
         stage.show();
