@@ -29,3 +29,6 @@ For students:
   Create interactive seminars, labs, and conducts interuniversity hackathons, bringing students together into a global community of developers.
 
 It is a platform capable of changing the approach to IT education, making it accessible, personalized and effective for every university and educational center around the world.
+
+
+test 1
