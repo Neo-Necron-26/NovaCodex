@@ -10,7 +10,7 @@ module app.novacodex.novacodex {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires java.logging;
+    requires jakarta.persistence;
 
     opens app.novacodex.novacodex to javafx.fxml;
     exports app.novacodex.novacodex;
