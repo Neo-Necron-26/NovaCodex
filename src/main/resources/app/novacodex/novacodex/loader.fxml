@@ -3,8 +3,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 20px; -fx-border-radius: 200px; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.novacodex.novacodex.Loader">
-    <ImageView disable="true" fitHeight="400.0" fitWidth="800.0" preserveRatio="true" scaleX="1.01">
+<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-radius: 20px; -fx-border-radius: 200px; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.novacodex.novacodex.Loader">
+    <ImageView disable="true" fitHeight="300.0" fitWidth="500.0" preserveRatio="true" scaleX="1.01">
         <Image url="@Images/loader.png"/>
     </ImageView>
 </AnchorPane>
