@@ -41,7 +41,7 @@ public class Loader extends Preloader {
             new Thread(() -> {
                 try {
                     // Wait for 1.5 seconds
-                    Thread.sleep(1500);
+                    Thread.sleep(2000);
 
                     // Close preloader and open main application
                     javafx.application.Platform.runLater(() -> {
