@@ -1,34 +1,55 @@
 package app.novacodex.novacodex;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication
 public class Main extends Application {
-    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-    private static Stage primaryStage;
+    private Stage primaryStage;
+    private static ConfigurableApplicationContext springContext;
+
+    @Override
+    public void init() {
+        notifyPreloader(new Preloader.StateChangeNotification(
+                Preloader.StateChangeNotification.Type.BEFORE_INIT, null));
+
+        springContext = new SpringApplicationBuilder(Main.class)
+                .headless(false)
+                .run();
+
+        notifyPreloader(new Preloader.StateChangeNotification(
+                Preloader.StateChangeNotification.Type.BEFORE_START, null));
+    }
 
     @Override
     public void start(Stage stage) {
-        primaryStage = stage;
-        // Don't show main window immediately - it will be shown by the preloader
+        this.primaryStage = stage;
+        showMainApp();
     }
 
-    public static void showMainApp() throws IOException {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 290);
-            primaryStage.setTitle("NovaCodex");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to load main application FXML", e);
-            throw e;
-        }
+    private void showMainApp() {
+        // Создаем сцену без FXML
+        Label label = new Label("Добро пожаловать в NovaCodex!");
+        StackPane root = new StackPane(label);
+        Scene scene = new Scene(root, 800, 600);
+
+        primaryStage.setTitle("NovaCodex");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+        springContext.close();
+        Platform.exit();
     }
 
     public static void main(String[] args) {
