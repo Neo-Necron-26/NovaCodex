@@ -13,30 +13,33 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class Main extends Application {
-    private Stage primaryStage;
     private static ConfigurableApplicationContext springContext;
+    private static Stage primaryStage;
 
     @Override
     public void init() {
+        // Уведомляем прелоадер о начале инициализации
         notifyPreloader(new Preloader.StateChangeNotification(
                 Preloader.StateChangeNotification.Type.BEFORE_INIT, null));
 
+        // Запускаем Spring контекст
         springContext = new SpringApplicationBuilder(Main.class)
                 .headless(false)
                 .run();
-
-        notifyPreloader(new Preloader.StateChangeNotification(
-                Preloader.StateChangeNotification.Type.BEFORE_START, null));
     }
 
     @Override
     public void start(Stage stage) {
-        this.primaryStage = stage;
-        showMainApp();
+        primaryStage = stage;
+        // Уведомляем прелоадер, что можно закрываться
+        notifyPreloader(new Preloader.StateChangeNotification(
+                Preloader.StateChangeNotification.Type.BEFORE_START, null));
+
+        // Показываем главное окно
+        Platform.runLater(this::showMainApp);
     }
 
     private void showMainApp() {
-        // Создаем сцену без FXML
         Label label = new Label("Добро пожаловать в NovaCodex!");
         StackPane root = new StackPane(label);
         Scene scene = new Scene(root, 800, 600);
@@ -48,12 +51,14 @@ public class Main extends Application {
 
     @Override
     public void stop() {
-        springContext.close();
+        if (springContext != null) {
+            springContext.close();
+        }
         Platform.exit();
     }
 
     public static void main(String[] args) {
-        System.setProperty("javafx.preloader", "app.novacodex.novacodex.Loader");
-        launch(args);
+        System.setProperty("javafx.preloader", Loader.class.getName());
+        Application.launch(Main.class, args);
     }
 }
