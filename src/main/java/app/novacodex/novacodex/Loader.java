@@ -1,5 +1,6 @@
 package app.novacodex.novacodex;
 
+import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,53 +18,38 @@ public class Loader extends Preloader {
     @Override
     public void start(Stage primaryStage) {
         this.preloaderStage = primaryStage;
-
         try {
-            // Load from FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("loader.fxml"));
             AnchorPane root = loader.load();
-
             Scene scene = new Scene(root);
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load preloader FXML", e);
-            // If preloader fails, try to launch main app directly
-            launchMainApp();
+            Platform.runLater(this::closeAndLaunchMain);
         }
     }
 
     @Override
-    public void handleStateChangeNotification(StateChangeNotification stateChangeNotification) {
-        if (stateChangeNotification.getType() == StateChangeNotification.Type.BEFORE_START) {
-            // Start delay in a separate thread
+    public void handleStateChangeNotification(StateChangeNotification notification) {
+        if (notification.getType() == StateChangeNotification.Type.BEFORE_START) {
             new Thread(() -> {
                 try {
-                    // Wait for 1.5 seconds
-                    Thread.sleep(2000);
-
-                    // Close preloader and open main application
-                    javafx.application.Platform.runLater(() -> {
-                        preloaderStage.close();
-                        launchMainApp();
-                    });
+                    Thread.sleep(2000);  // Искусственная задержка для демонстрации
+                    Platform.runLater(this::closeAndLaunchMain);
                 } catch (InterruptedException e) {
                     LOGGER.log(Level.WARNING, "Preloader delay interrupted", e);
                     Thread.currentThread().interrupt();
-                    launchMainApp();
+                    Platform.runLater(this::closeAndLaunchMain);
                 }
             }).start();
         }
     }
 
-    private void launchMainApp() {
-        try {
-            Main.showMainApp();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to launch main application", e);
-            // If everything fails, at least exit gracefully
-            javafx.application.Platform.exit();
-        }
+    private void closeAndLaunchMain() {
+        preloaderStage.close();
+        // Больше не нужно вызывать Main.showMainApplication()
+        // Главное окно откроется автоматически через start() в Main
     }
 }
