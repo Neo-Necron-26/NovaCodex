@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.novacodex.novacodex.RoleSelectionWindow">
+   <ImageView disable="true" fitHeight="814.0" fitWidth="1400.0" preserveRatio="true" scaleX="1.01">
+      <Image url="@Images/role-selection-window.png" />
+   </ImageView>
+   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="520.0" layoutY="44.0" style="-fx-text-fill: #a0c7cf;" text="Выберите вашу роль:" textFill="#a0c7cf">
+      <font>
+         <Font name="Calibri" size="40.0" />
+      </font></Label>
+   <Pane layoutX="281.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #151515; -fx-background-radius: 20;" />
+   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="814.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Преподаватель" textFill="#a0c7cf">
+      <font>
+         <Font name="Calibri" size="40.0" />
+      </font></Label>
+   <Pane layoutX="785.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #151515; -fx-background-radius: 20;" />
+   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="379.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Студент" textFill="#a0c7cf">
+      <font>
+         <Font name="Calibri" size="40.0" />
+      </font></Label>
+   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="1257.0" layoutY="758.0" style="-fx-text-fill: #637A7F;" text="Университет" underline="true">
+      <font>
+         <Font name="Calibri" size="24.0" />
+      </font></Label>
+</AnchorPane>
