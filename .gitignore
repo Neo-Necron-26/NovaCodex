@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Конфиги с секретами
+.env
+application*.properties
