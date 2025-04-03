@@ -1,5 +1,6 @@
 package app.novacodex.novacodex;
 
+import app.novacodex.novacodex.loader.Loader;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;

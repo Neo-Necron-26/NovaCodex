@@ -1,4 +1,5 @@
 target/
+.gitignore
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -38,5 +39,6 @@ build/
 .DS_Store
 
 # Конфиги с секретами
+/config/
 .env
 application*.properties
