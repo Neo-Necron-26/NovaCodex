@@ -37,4 +37,8 @@ module app.novacodex.novacodex {
             org.hibernate.orm.core,
             spring.core,
             javafx.base;
+    exports app.novacodex.novacodex.core;
+    opens app.novacodex.novacodex.core to javafx.fxml, spring.beans, spring.context, spring.core;
+    exports app.novacodex.novacodex.loader;
+    opens app.novacodex.novacodex.loader to javafx.fxml, spring.beans, spring.context, spring.core;
 }

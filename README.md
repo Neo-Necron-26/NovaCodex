@@ -1,6 +1,6 @@
 # NovaCodex
 
-![photo-project](src/main/resources/app/novacodex/novacodex/Images/readme.png)
+![photo-project](src/main/resources/app/novacodex/novacodex/images/readme.png)
 
 This project is being implemented to create an innovative program that will be aimed at supporting students in the IT field.
 

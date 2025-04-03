@@ -1,4 +1,4 @@
-package app.novacodex.novacodex;
+package app.novacodex.novacodex.loader;
 
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
