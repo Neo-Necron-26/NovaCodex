@@ -1,19 +1,25 @@
 package app.novacodex.novacodex;
 
-import app.novacodex.novacodex.loader.Loader;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.io.IOException;
+
 @SpringBootApplication
 public class Main extends Application {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static ConfigurableApplicationContext springContext;
     private static Stage primaryStage;
 
@@ -41,13 +47,27 @@ public class Main extends Application {
     }
 
     private void showMainApp() {
-        Label label = new Label("Добро пожаловать в NovaCodex!");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 800, 600);
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("editor-view.fxml"));
+            loader.setControllerFactory(springContext::getBean);
 
-        primaryStage.setTitle("NovaCodex");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 1000, 700);
+
+            primaryStage.setTitle("NovaCodex");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            logger.error("Failed to load editor-view.fxml", e);
+            Label label = new Label("Ошибка загрузки интерфейса. Пожалуйста, проверьте файлы приложения.");
+            StackPane stackPane = new StackPane(label);
+            Scene scene = new Scene(stackPane, 1000, 700);
+
+            primaryStage.setTitle("NovaCodex - ошибка");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
 
     @Override
@@ -60,6 +80,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         System.setProperty("javafx.preloader", Loader.class.getName());
+        System.setProperty("javafx.version", "21.0.2");
         Application.launch(Main.class, args);
     }
 }
