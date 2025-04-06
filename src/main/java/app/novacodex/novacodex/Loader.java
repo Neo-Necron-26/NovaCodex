@@ -1,4 +1,4 @@
-package app.novacodex.novacodex.loader;
+package app.novacodex.novacodex;
 
 import javafx.application.Preloader;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,12 @@ import java.util.Objects;
 
 public class Loader extends Preloader {
     private Stage preloaderStage;
+
+    @Override
+    public void init() {
+        // Явная инициализация JavaFX
+        System.setProperty("javafx.version", "21.0.2");
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
