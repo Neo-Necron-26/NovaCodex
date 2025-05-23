@@ -13,7 +13,12 @@
       <font>
          <Font name="Calibri" size="40.0" />
       </font></Label>
-   <Pane layoutX="281.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #151515; -fx-background-radius: 20;" />
+   <Pane layoutX="281.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #151515; -fx-background-radius: 20;">
+      <children>
+         <ImageView fitHeight="375.0" fitWidth="375.0" layoutX="-17.0" layoutY="54.0">
+            <Image url="@images/ученик.png" />
+         </ImageView>
+      </children></Pane>
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="814.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Преподаватель" textFill="#a0c7cf">
       <font>
          <Font name="Calibri" size="40.0" />
@@ -22,7 +27,8 @@
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="379.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Студент" textFill="#a0c7cf">
       <font>
          <Font name="Calibri" size="40.0" />
-      </font></Label>
+      </font>
+   </Label>
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="1257.0" layoutY="758.0" style="-fx-text-fill: #637A7F;" text="Университет" underline="true">
       <font>
          <Font name="Calibri" size="24.0" />
