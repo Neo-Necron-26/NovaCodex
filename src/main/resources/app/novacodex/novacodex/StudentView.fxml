@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <!-- Фон -->
+   <ImageView fitHeight="814.0" fitWidth="1400.0" preserveRatio="true" scaleX="1.01">
+      <Image url="@images/role-selection-window.png" />
+   </ImageView>
+
+   <!-- Контент страницы студента -->
+   <Label layoutX="550" layoutY="50" text="Студенческий интерфейс" style="-fx-text-fill: #a0c7cf;">
+      <font>
+         <Font name="Calibri" size="40.0" />
+      </font>
+   </Label>
+</AnchorPane>
