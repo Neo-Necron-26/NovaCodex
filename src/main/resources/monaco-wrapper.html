@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        html, body, #container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+    <title>NovaCodex - редактор</title>
+</head>
+<body>
+<div id="container"></div>
+
+<script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+<script>
+    require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
+    let editor;
+
+    require(['vs/editor/editor.main'], function() {
+        editor = monaco.editor.create(document.getElementById('container'), {
+            value: '// Start coding...\n',
+            language: 'java',
+            theme: 'vs-dark',
+            automaticLayout: true
+        });
+
+        // Передаем изменения в Java
+        editor.onDidChangeModelContent(function() {
+            if (window.javaBridge) {
+                window.javaBridge.handleContentChange(editor.getValue());
+            }
+        });
+    });
+
+    // Функции для вызова из Java
+    window.setValue = function(code) {
+        if (editor) editor.setValue(code);
+    };
+
+    window.getValue = function() {
+        return editor ? editor.getValue() : "";
+    };
+</script>
+</body>
+</html>

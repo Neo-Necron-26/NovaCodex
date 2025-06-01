@@ -2,10 +2,11 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.web.WebView?>
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="app.novacodex.novacodex.editor.controller.EditorController">
     <center>
-        <BorderPane fx:id="editorContainer"/>
+        <WebView fx:id="monacoWebView" />
     </center>
 </BorderPane>
