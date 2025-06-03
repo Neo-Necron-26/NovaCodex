@@ -1,9 +1,6 @@
 module app.novacodex.novacodex {
 
-    requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
-    requires javafx.base;
 
 
     requires org.controlsfx.controls;
@@ -26,6 +23,10 @@ module app.novacodex.novacodex {
     requires org.hibernate.orm.core;
     requires org.fxmisc.richtext;
     requires org.slf4j;
+    requires javafx.web;
+    requires jdk.jsobject;
+    requires org.apache.commons.io;
+    requires javafx.controls;
 
     exports app.novacodex.novacodex;
 
