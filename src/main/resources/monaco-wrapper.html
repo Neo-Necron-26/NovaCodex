@@ -1,50 +1,270 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCodex Editor</title>
     <style>
-        html, body, #container {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #toolbar {
+            background: #1e1e1e;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        #toolbar button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #toolbar button:hover {
+            background: #444;
+        }
+
+        #editor-container {
+            flex: 1;
+            display: flex;
+        }
+
+        #monaco-editor {
+            width: 70%;
+            height: 100%;
+        }
+
+        #output {
+            width: 30%;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            border-left: 1px solid #333;
+        }
+
+        #output pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .error {
+            color: #f48771;
+        }
+
+        .success {
+            color: #608b4e;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #language-selector {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            margin-left: auto;
         }
     </style>
-    <title>NovaCodex - редактор</title>
 </head>
 <body>
-<div id="container"></div>
+<div id="container">
+    <div id="toolbar">
+        <button id="run-button" title="Run Code (Ctrl+Enter)">
+            <span>▶</span> Run
+        </button>
+        <button id="save-button" title="Save File">
+            <span>💾</span> Save
+        </button>
+        <input type="file" id="file-input">
+        <button id="open-button" title="Open File">
+            <span>📂</span> Open
+        </button>
 
-<script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+        <select id="language-selector">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+            <option value="cpp">C++</option>
+        </select>
+    </div>
+
+    <div id="editor-container">
+        <div id="monaco-editor"></div>
+        <div id="output"></div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.40.0/min/vs/loader.min.js"></script>
 <script>
-    require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' }});
+    // Конфигурация Monaco Editor
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.40.0/min/vs' }});
+
     let editor;
+    let currentLanguage = 'javascript';
 
+    // Инициализация редактора
     require(['vs/editor/editor.main'], function() {
-        editor = monaco.editor.create(document.getElementById('container'), {
-            value: '// Start coding...\n',
-            language: 'java',
+        editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+            value: localStorage.getItem('lastCode') || '// Welcome to NovaCodex!\n// Start coding here...\n\nfunction hello() {\n    return "Hello, world!";\n}\n\nconsole.log(hello());',
+            language: currentLanguage,
             theme: 'vs-dark',
-            automaticLayout: true
+            automaticLayout: true,
+            minimap: { enabled: true },
+            fontSize: 14,
+            scrollBeyondLastLine: false,
+            renderWhitespace: 'selection'
         });
 
-        // Передаем изменения в Java
+        // Сохранение кода при изменении
         editor.onDidChangeModelContent(function() {
-            if (window.javaBridge) {
-                window.javaBridge.handleContentChange(editor.getValue());
-            }
+            localStorage.setItem('lastCode', editor.getValue());
         });
+
+        // Обработка сочетания клавиш Ctrl+Enter
+        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, function() {
+            runCode();
+        });
+
+        // Настройка кнопки запуска
+        document.getElementById('run-button').addEventListener('click', runCode);
+
+        // Настройка кнопки сохранения
+        document.getElementById('save-button').addEventListener('click', saveFile);
+
+        // Настройка кнопки открытия файла
+        document.getElementById('open-button').addEventListener('click', function() {
+            document.getElementById('file-input').click();
+        });
+
+        // Настройка выбора языка
+        document.getElementById('language-selector').addEventListener('change', function(e) {
+            currentLanguage = e.target.value;
+            monaco.editor.setModelLanguage(editor.getModel(), currentLanguage);
+        });
+
+        // Обработка выбора файла
+        document.getElementById('file-input').addEventListener('change', openFile);
     });
 
-    // Функции для вызова из Java
-    window.setValue = function(code) {
-        if (editor) editor.setValue(code);
-    };
+    // Функция выполнения кода
+    async function runCode() {
+        const code = editor.getValue();
+        const outputElement = document.getElementById('output');
 
-    window.getValue = function() {
-        return editor ? editor.getValue() : "";
-    };
+        outputElement.innerHTML = '<pre class="success">Executing code...</pre>';
+
+        try {
+            const response = await fetch('/api/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + btoa('user:apikey') // Замените на реальные данные
+                },
+                body: JSON.stringify({
+                    code: code,
+                    language: currentLanguage
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.output) {
+                outputElement.innerHTML += '<pre class="success">' + result.output + '</pre>';
+            }
+
+            if (result.error) {
+                outputElement.innerHTML += '<pre class="error">' + result.error + '</pre>';
+            }
+
+            // Прокрутка к нижней части вывода
+            outputElement.scrollTop = outputElement.scrollHeight;
+        } catch (error) {
+            outputElement.innerHTML += '<pre class="error">Execution error: ' + error.message + '</pre>';
+        }
+    }
+
+    // Функция сохранения файла
+    function saveFile() {
+        const code = editor.getValue();
+        const blob = new Blob([code], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `novacodex-${new Date().toISOString().slice(0,10)}.${getFileExtension()}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // Функция открытия файла
+    function openFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            editor.setValue(e.target.result);
+
+            // Попытка определить язык по расширению файла
+            const extension = file.name.split('.').pop().toLowerCase();
+            const languageMap = {
+                'js': 'javascript',
+                'py': 'python',
+                'java': 'java',
+                'cs': 'csharp',
+                'cpp': 'cpp',
+                'h': 'cpp',
+                'c': 'cpp'
+            };
+
+            if (languageMap[extension]) {
+                currentLanguage = languageMap[extension];
+                monaco.editor.setModelLanguage(editor.getModel(), currentLanguage);
+                document.getElementById('language-selector').value = currentLanguage;
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    // Получение расширения файла для сохранения
+    function getFileExtension() {
+        const extensions = {
+            'javascript': 'js',
+            'python': 'py',
+            'java': 'java',
+            'csharp': 'cs',
+            'cpp': 'cpp'
+        };
+        return extensions[currentLanguage] || 'txt';
+    }
 </script>
 </body>
 </html>

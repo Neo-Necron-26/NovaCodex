@@ -9,34 +9,56 @@
    <ImageView disable="true" fitHeight="814.0" fitWidth="1400.0" preserveRatio="true" scaleX="1.01">
       <Image url="@images/role-selection-window.png" />
    </ImageView>
+
+   <!-- Заголовок -->
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="520.0" layoutY="44.0" style="-fx-text-fill: #a0c7cf;" text="Выберите вашу роль:" textFill="#a0c7cf">
       <font>
          <Font name="Calibri" size="40.0" />
-      </font></Label>
-   <Pane layoutX="281.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0"
-         style="-fx-background-color: #151515; -fx-background-radius: 20;">
-      <ImageView fitHeight="318.0" fitWidth="312.0" layoutX="9.0" layoutY="98.0">
-         <Image url="@images/ученик.png"/>
-      </ImageView>
-   </Pane>
+      </font>
+   </Label>
 
-   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="814.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Преподаватель" textFill="#a0c7cf">
-      <font>
-         <Font name="Calibri" size="40.0" />
-      </font></Label>
+   <!-- Кнопка "Студент" -->
+   <Button layoutX="281" layoutY="210" prefHeight="340" prefWidth="340"
+           style="-fx-background-color: #151515; -fx-background-radius: 20;">
+      <graphic>
+         <StackPane alignment="BOTTOM_CENTER">  <!-- Выравнивание по нижнему краю -->
+            <ImageView fitHeight="300" fitWidth="300" preserveRatio="true"
+                       style="-fx-effect: dropshadow(gaussian, #000, 10, 0.5, 0, 5);">
+               <Image url="@images/ученик.png"/>
+            </ImageView>
+         </StackPane>
+      </graphic>
+   </Button>
 
-   <Pane layoutX="785.0" layoutY="210.0" prefHeight="340.0" prefWidth="340.0" style="-fx-background-color: #151515; -fx-background-radius: 20;" />
-   <ImageView fitHeight="329.0" fitWidth="319.0" layoutX="786.0" layoutY="281.0">
-      <Image url="@images/учитель.png" />
-   </ImageView>
+   <!-- Кнопка "Преподаватель" -->
+   <Button layoutX="785" layoutY="210" prefHeight="340" prefWidth="340"
+           style="-fx-background-color: #151515; -fx-background-radius: 20;">
+      <graphic>
+         <StackPane alignment="BOTTOM_CENTER">
+            <ImageView fitHeight="310" fitWidth="310" preserveRatio="true"
+                       style="-fx-effect: dropshadow(gaussian, #000, 10, 0.5, 0, 5);">
+               <Image url="@images/учитель.png"/>
+            </ImageView>
+         </StackPane>
+      </graphic>
+   </Button>
 
+   <!-- Подписи под кнопками -->
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="379.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Студент" textFill="#a0c7cf">
       <font>
          <Font name="Calibri" size="40.0" />
       </font>
    </Label>
+   <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="814.0" layoutY="577.0" style="-fx-text-fill: #a0c7cf;" text="Преподаватель" textFill="#a0c7cf">
+      <font>
+         <Font name="Calibri" size="40.0" />
+      </font>
+   </Label>
+
+   <!-- Подпись "Университет" -->
    <Label alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="1257.0" layoutY="758.0" style="-fx-text-fill: #637A7F;" text="Университет" underline="true">
       <font>
          <Font name="Calibri" size="24.0" />
-      </font></Label>
+      </font>
+   </Label>
 </AnchorPane>
