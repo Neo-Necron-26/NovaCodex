@@ -27,6 +27,9 @@ module app.novacodex.novacodex {
     requires jdk.jsobject;
     requires org.apache.commons.io;
     requires javafx.controls;
+    requires spring.web;
+    requires spring.security.config;
+    requires spring.security.web;
 
     exports app.novacodex.novacodex;
 
@@ -40,6 +43,9 @@ module app.novacodex.novacodex {
             org.hibernate.orm.core,
             spring.core,
             javafx.base;
+
+    opens app.novacodex.novacodex.config to spring.core;
+    exports app.novacodex.novacodex.config to spring.core, spring.beans, spring.context;
 
     exports app.novacodex.novacodex.editor.controller;
     exports app.novacodex.novacodex.loader;
