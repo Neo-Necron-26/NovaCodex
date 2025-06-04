@@ -19,7 +19,7 @@
 
    <!-- Верхняя панель -->
    <AnchorPane layoutY="0.0" prefHeight="60.0" prefWidth="1400.0" style="-fx-background-color: rgba(30, 30, 30, 0.7);">
-      <Label layoutX="20.0" layoutY="15.0" text="Ученик" style="-fx-text-fill: #e0e0e0; -fx-font-weight: bold;">
+      <Label layoutX="20.0" layoutY="15.0" text="Преподаватель" style="-fx-text-fill: #e0e0e0; -fx-font-weight: bold;">
          <font>
             <Font name="Calibri" size="24.0" />
          </font>
@@ -27,8 +27,8 @@
    </AnchorPane>
 
    <!-- Центральная область с кнопками -->
-   <VBox alignment="CENTER" layoutX="550.0" layoutY="150.0" spacing="20" prefWidth="300.0">
-      <!-- Кнопки -->
+   <VBox alignment="CENTER" layoutX="550.0" layoutY="100.0" spacing="15" prefWidth="300.0">
+      <!-- Основные кнопки -->
       <Button prefHeight="50.0" prefWidth="300.0"
               text="Создать файл" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
          <font>
@@ -51,22 +51,50 @@
       </Button>
 
       <Button prefHeight="50.0" prefWidth="300.0"
-              text="Подключиться к ..." style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+              text="Начать трансляцию" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </Button>
 
       <Button prefHeight="50.0" prefWidth="300.0"
-              text="Roadmap" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+              text="Подключиться к сессии" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
       </Button>
 
-      <!-- Основная кнопка -->
       <Button prefHeight="50.0" prefWidth="300.0"
-              text="Загрузить работу" style="-fx-background-color: rgba(48, 48, 48, 0.9); -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-border-color: #555; -fx-border-width: 1;">
+              text="План занятий" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Button>
+
+      <!-- Специальные кнопки для преподавателя -->
+      <Button prefHeight="50.0" prefWidth="300.0"
+              text="Создать задание" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Button>
+
+      <Button prefHeight="50.0" prefWidth="300.0"
+              text="Проверить работы" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Button>
+
+      <Button prefHeight="50.0" prefWidth="300.0"
+              text="Управление группой" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font>
+      </Button>
+
+      <Button prefHeight="50.0" prefWidth="300.0"
+              text="Аналитика успеваемости" style="-fx-background-color: rgba(37, 37, 37, 0.8); -fx-text-fill: #e0e0e0; -fx-font-weight: bold; -fx-border-color: #444; -fx-border-width: 1;">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
