@@ -14,7 +14,7 @@
    </ImageView>
 
    <!-- Заголовок преподавательского интерфейса -->
-   <Label layoutX="400" layoutY="40" text="Добро пожаловать, преподаватель!"
+   <Label layoutX="550" layoutY="40" text="Добро пожаловать!"
           style="-fx-text-fill: #a0c7cf;">
       <font>
          <Font name="Calibri" size="40.0" />
