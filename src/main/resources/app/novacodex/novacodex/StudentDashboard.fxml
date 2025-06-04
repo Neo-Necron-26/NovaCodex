@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <!-- Верхняя панель -->
+   <top>
+      <HBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 15px;">
+         <Label text="NextCodeX - Ученик" style="-fx-text-fill: white; -fx-font-weight: bold;"/>
+      </HBox>
+   </top>
+
+   <!-- Центральная область -->
+   <center>
+      <VBox spacing="20" padding="20">
+         <!-- Блок заданий -->
+         <VBox style="-fx-background-color: white; -fx-padding: 15px; -fx-spacing: 10px;">
+            <Label text="Мои задания" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="taskListView" prefHeight="200" />
+         </VBox>
+
+         <!-- Кнопка загрузки -->
+         <Button text="Загрузить работу" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+      </VBox>
+   </center>
+
+   <!-- Нижняя панель -->
+   <bottom>
+      <HBox alignment="CENTER" spacing="30" style="-fx-background-color: #ecf0f1; -fx-padding: 10px;">
+         <Button text="Главная"/>
+         <Button text="Прогресс"/>
+         <Button text="Опросы"/>
+      </HBox>
+   </bottom>
+</BorderPane>
